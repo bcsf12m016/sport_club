@@ -1,0 +1,296 @@
+﻿@using SportsClub
+@model dynamic
+@{
+    ViewBag.Title = ViewBag.teamName;
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+
+ }
+
+<html ><head><title>@ViewBag.teamName
+</title>
+
+       <link rel="stylesheet" type="text/css" href="~/Content/expand.css">
+
+    </head><body>
+    
+
+                @{
+                    
+                    if(Session["error"]=="true")
+                    {
+                      <div class="alert-message warning">
+                       <a class="close" href="#">&times;</a>
+                       <h6><strong>Added Member already exists in this team</strong> </h6>
+                        </div>
+                    
+                        Session["error"] = "false";
+                    }   
+                    
+                    
+                }
+    
+                       
+                                    <div class="text-uppercase open col-lg-3 " >
+                                
+                                        <div style="color:white">
+                                 
+                                            <h3 style="float:left">&emsp;&emsp;&nbsp;<b>@ViewBag.TeamName</b> </h3>
+                 
+                                         </div>
+                    
+                                       
+                                            <img src=@ViewBag.TeamPic width="250" height="250"  />
+
+                                            <h5 style="float:left">&emsp;&emsp;&emsp;@ViewBag.teamGender 18+</h5>
+                                            <br />
+                                            <h5 style="float:left">&emsp;&emsp;&emsp;@ViewBag.teamAddress </h5>
+
+
+
+                                        </div>
+
+                   
+                   
+                   
+    
+
+                   <div class="text-uppercase open col-lg-3 " >
+
+                       <h2 style="float:inherit"> <a href="#modal-addMember" data-toggle="modal" class="btn btn-primary btn-circle">Add Member <b>+</b></a></h2>
+
+                       <br /><br />
+                       
+                       @{
+                           
+                           
+                           foreach(var i in Model.Members)
+                           {
+                            
+                                 <h6 > <a @*href="/Team/DeleteMember/@i.Id"*@ ><i class="fa fa-remove"></i> </a></h6>
+   
+                                   <h5>@i.Name</h5>
+                                     <img src=@i.ProfilePic width="100" height="100" style="border:groove" />
+                           
+                            }
+                           
+                           
+                       }
+
+
+                   </div>
+
+
+                   <div class="text-uppercase open col-lg-3 " style="color:black">
+
+                       <h2 style="float:inherit"> <a href="#modal-addEvent" data-toggle="modal" class="btn btn-primary">Create New Event</a></h2>
+
+                       <br />
+
+                       
+                       &emsp;
+
+                       @{
+
+                           int j=0;
+                            foreach (var i in Model.Events)
+                            {       
+                                  <h6 > <a href="/Event/DeleteEvent/@i.Id"><i class="fa fa-remove"></i> </a></h6>
+
+                                       <h4 style="color:white"><b>Event <i class="fa fa-play"></i>           </b>@i.EventType</h4>
+                                       <h6><b>Date  <i class="fa fa-calendar"></i> &emsp; &nbsp;&emsp;&nbsp;        &nbsp;&emsp;&emsp;       </b>@i.Date</h6>
+                                       <h6><b>Venue <i class="fa fa-location-arrow"></i>  &emsp;&emsp;&nbsp;&nbsp;       &emsp;&emsp;  </b>@i.Venue</h6>
+                                       <h6><b>Address <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&emsp;&nbsp;       &emsp;&emsp;</b>@i.Address</h6>
+    
+                           
+                                   <div>
+                                            <input class="toggle-box" id="header+@j" type="checkbox" />
+                                       <label for="header+@j" style="font-size:small">Notes</label>
+
+                                            <div>
+                                                <h6>@i.Notes</h6>
+                                            </div>
+                                        </div>
+                                         
+                           j++;
+                                   <br />
+  
+                       
+                            }
+
+
+                       }
+
+
+
+
+                   </div>
+
+
+
+
+
+                   <div class="modal fade tiny" id="modal-addEvent" tabindex="-1" role="dialog" aria-hidden="true">
+                       <div class="modal-dialog layout-login">
+                           <div class="modal-content">
+
+                               <div class="modal-body">
+
+
+                                   <span class='white bold block text-center margin-bottom-small'></span>
+
+
+
+                                   <div class='panel themenav-border boxshadow-darkblue'>
+                                       <div class='panel-encase'>
+
+                                           <h3 class="margin-bottom margin-top text-center uppercase" style="color:black"><i class='fa fa-eye'></i>&nbsp;&nbsp;<b>Create New Event</b></h3>
+
+                                           <br />
+                                           <form action="/Event/AddEvent/@Session["SessionTeamId"]" method="post">
+
+
+                                               <div class="form-group ctrlHolder input-group">
+                                                   <span class="input-group-addon"><b><i class="fa fa-play"></i></b></span>
+
+                                                   <input class="form-control text" id="EventType" name="EventType" placeholder="Enter Event Type " size="15" type="text" spellcheck="true" required>
+
+                                               </div>
+                                               <div class="form-group ctrlHolder input-group">
+                                                   <span class="input-group-addon"><b><i class="fa fa-location-arrow"></i></b></span>
+
+                                                   <input class="form-control text" id="Venue" name="Venue" placeholder="Enter Venue " size="15" type="text" spellcheck="true" required>
+
+                                               </div>
+
+                                               <div class="form-group ctrlHolder input-group">
+                                                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                                   <input class="form-control text" id="Date" name="Date" placeholder="Enter Date " size="15" type="text" spellcheck="true" required>
+
+                                               </div>
+
+
+                                               <div class="form-group ctrlHolder input-group">
+                                                   <span class="input-group-addon"><b><i class="fa fa-map-marker"></i></b></span>
+
+                                                   <input class="form-control text" id="Address" name="Address" placeholder="Enter Address " size="15" type="text" spellcheck="true" required>
+
+                                               </div>
+
+
+
+                                               <div class="input-group ctrlHolder input-group" style="color:black">
+                                                   
+                                                 <textarea id="Notes" name="Notes" placeholder="Description" spellcheck="true" rows="3" cols="24" style="font-size:large" required></textarea>
+
+                                               </div>
+
+                                               <div>
+
+                                                   <h4> <input class="btn btn-block btn-lg btn-success margin-top " type="submit" value="ADD" style="color:white" /></h4>
+                                               </div>
+
+
+                                           </form>
+
+                                           <hr class='transparent'>
+
+                                           <div class="buttonHolder">
+                                               <p>
+                                               </p>
+                                           </div>
+
+
+                                       </div>
+                                       <div class='panel-footer'>
+                                       </div>
+                                   </div>
+
+
+                                   <h6>
+                                       <a data-dismiss="modal" class='white'>Close &times;</a>
+                                   </h6>
+                               </div>
+                           </div><!-- /.modal-content -->
+                       </div><!-- /.modal-dialog -->
+                   </div><!-- // modal-login -->
+                   <!-- modal-signup -->
+
+
+                       <div class="modal fade tiny" id="modal-addMember" tabindex="-1" role="dialog" aria-hidden="true">
+                           <div class="modal-dialog layout-login">
+                               <div class="modal-content">
+
+                                   <div class="modal-body">
+
+
+                                       <span class='white bold block text-center margin-bottom-small'></span>
+
+
+
+                                       <div class='panel themenav-border boxshadow-darkblue'>
+                                           <div class='panel-encase'>
+
+                                               <h3 class="margin-bottom margin-top text-center uppercase" style="color:black"><i class='fa fa-gamepad'></i>&nbsp;&nbsp;<b>Add Member</b></h3>
+
+                                               <br />
+                                               <form action="/Team/AddMember/@ViewBag.teamId" method="post">
+
+
+                                                   <div class="form-group ctrlHolder input-group">
+                                                       <span class="input-group-addon"><b><i class="fa fa-smile-o"></i></b></span>
+
+                                                       <input class="form-control text" id="Name" name="Name" placeholder="Name " size="15" type="text" spellcheck="true" required>
+
+                                                   </div>
+                                                   <div class="form-group ctrlHolder input-group">
+                                                       <span class="input-group-addon"><b>@@</b></span>
+
+                                                       <input class="form-control text" id="Email" name="Email" placeholder="Email " size="15" type="text" spellcheck="true" required>
+
+                                                   </div>
+
+                                                   <div>
+
+                                                       <h4> <input class="btn btn-block btn-lg btn-success margin-top " type="submit" value="ADD" style="color:white" /></h4>
+                                                   </div>
+
+
+                                               </form>
+
+
+
+
+
+
+                                               <hr class='transparent'>
+
+                                               <div class="buttonHolder">
+
+
+
+
+
+                                                   <p>
+
+                                                   </p>
+
+                                               </div>
+
+
+                                           </div>
+                                           <div class='panel-footer'>
+                                           </div>
+                                       </div>
+
+
+                                       <h6>
+                                           <a data-dismiss="modal" class='white'>Close &times;</a>
+                                       </h6>
+                                   </div>
+                               </div><!-- /.modal-content -->
+                           </div><!-- /.modal-dialog -->
+                       </div><!-- // modal-login -->
+                       <!-- modal-signup -->
+
+</body></html>

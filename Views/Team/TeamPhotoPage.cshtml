@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+    @{
+        try{
+        foreach(var i in Model)
+        {
+             
+                 if (i.Id == ViewBag.IdOfTeamPic)
+                 {
+                 
+                     <h2>Choose Team Picture</h2>
+                 
+                             <div style="font-size:larger">
+                        
+                                 <a href="#modal-TeamPic" data-toggle="modal" class="open">
+                                     <img src=@i.TeamPic width="250" height="250" style="border:groove" />
+
+
+                                 </a>
+                    
+                                 
+                    
+                                </div>
+                }           
+
+                
+
+        }
+        }
+        catch
+        {
+            <p>Time Out : Please Login</p>
+        }
+
+    }
+
+    
+
+    <div class="modal fade tiny" id="modal-TeamPic" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog layout-login">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+                    <span class='white bold block text-center margin-bottom-small'></span>
+
+
+
+                    <div class='panel themenav-border boxshadow-darkblue'>
+                        <div class='panel-encase'>
+
+                            <h3 class="margin-bottom margin-top text-center uppercase" style="color:black"><i class='fa fa-photo'></i>&nbsp;&nbsp;<b>Choose Team Picture</b></h3>
+
+                            <form action="/Team/TeamPhoto/@ViewBag.IdOfTeamPic" method="post" enctype="multipart/form-data">
+
+                                <div class="input-group ctrlHolder form-group">
+                                </div>
+                                <div class="input-group ctrlHolder form-group">
+
+                                    
+                                        <i class="fa fa-photo" style="color:black"></i>
+                                    
+                                    <h5>
+                                        <input class="form_row" id="file1" name="file1" placeholder="Attach " size="20" type="file" style="color:black" required>
+                                    </h5>
+                                </div>
+
+                                <div class="input-group ctrlHolder form-group">
+                                    <input type="submit" value="Upload" class="btn btn-primary" />
+
+                                </div>
+
+                                @ViewBag.Messgae
+                            </form>
+
+
+
+                            <hr class='transparent'>
+
+                            <div class="buttonHolder">
+
+
+
+
+
+                                <p>
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+                        <div class='panel-footer'>
+                        </div>
+                    </div>
+
+
+                    <h6>
+                        <a data-dismiss="modal" class='white'>Close &times;</a>
+                    </h6>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- // modal-login -->
+    <!-- modal-signup -->
+
+</body>
+</html>

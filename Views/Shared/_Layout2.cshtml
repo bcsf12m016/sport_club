@@ -1,0 +1,225 @@
+﻿@*@model SportsClub.Models.Team*@
+<!DOCTYPE html>
+<html>
+<head>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/bootstrap.css")
+    @Scripts.Render("~/Content/font-awesome.css")
+    @Scripts.Render("~/Content/style.css")
+    @Scripts.Render("~/Content/Site.css")
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("scripts", required: false)
+
+    <!-- FOOTER SECTION END-->
+    <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <!-- BACKGROUND VIDEO PLUGIN  -->
+    <script src="~/Scripts/jquery.mb.YTPlayer.js"></script>
+    <!-- SCROLLING SCRIPTS PLUGIN  -->
+    <script src="~/Scripts/jquery.easing.min.js"></script>
+    <!-- CUSTOM SCRIPTS   -->
+    <script src="~/Scripts/custom.js"></script>
+
+    <link href="~/Images/sports.png" rel="shortcut icon" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Sports Club</title>
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS STYLE SHEET -->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <a class="navbar-brand" href="/Home/Index">
+            <img src="../../Images/sports.png" alt="" class="img-responsive" width="70" height="70" />
+        </a>
+        <div class="container">
+            &nbsp;  &nbsp;<a href="#modal-profilePic" data-toggle="modal"><img src=@Session["ProfilePic"] id="profile" width="80" height="80" />|</a>
+            
+            <div class="navbar-header">
+                
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+           
+            </div>
+            
+            <div class="navbar-collapse collapse navbar-right scroll-me">
+                
+
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav ">
+                        <li><h4 style="align-self:center">  <a href="/Team/TeamIndex" class="btn btn-primary" style="color:white">DASHBOARD<i class="fa fa-dashboard"></i></a></h4></li>
+                        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                        
+                        <li style="font-weight:bold">@Html.ActionLink(Session["Name"].ToString(), "Register", "Account") </li>
+                        <li>
+                            @Html.ActionLink("Logout", "Logout", "Account")
+                        </li>
+                           
+                        
+                    </ul>
+
+
+                }
+                else
+                {
+                    <ul class="nav navbar-nav ">
+                        <li><h4 style="align-self:center">  <a href="/Team/TeamIndex" class="btn btn-primary" style="color:white">DASHBOARD<i class="fa fa-dashboard"></i></a></h4></li>
+                        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+
+                    </ul>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal fade tiny" id="modal-profilePic" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog layout-login">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+                    <span class='white bold block text-center margin-bottom-small'></span>
+
+
+
+                    <div class='panel themenav-border boxshadow-darkblue'>
+                        <div class='panel-encase'>
+
+                            <h3 class="margin-bottom margin-top text-center uppercase" style="color:black"><i class='fa fa-photo'></i>&nbsp;&nbsp;<b>Choose Profile Picture</b></h3>
+
+                            <form action="/Team/SavePhoto" method="post" enctype="multipart/form-data">
+
+                                <div class="input-group ctrlHolder form-group">
+                                    <h2>Attach Photo</h2>
+                                </div>
+
+                                <div class="input-group ctrlHolder form-group">
+                                    <span class="input-group-addon"><i class="fa fa-photo" ></i></span>
+
+                                    <input class="form_row" id="file" name="file" placeholder="Attach " size="20" type="file" style="color:black">
+
+                                </div>
+
+                                <div class="input-group ctrlHolder form-group">
+                                    <input type="submit" value="Upload" class="btn btn-primary" />
+
+                                </div>
+
+                                @ViewBag.Messgae
+                            </form>
+
+
+
+                            <hr class='transparent'>
+
+                            <div class="buttonHolder">
+
+
+
+
+
+                                <p>
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+                        <div class='panel-footer'>
+                        </div>
+                    </div>
+
+
+                    <h6>
+                        <a data-dismiss="modal" class='white'>Close &times;</a>
+                    </h6>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- // modal-login -->
+    <!-- modal-signup -->
+
+
+
+  
+    <div id="home">
+
+        <div class="overlay">
+
+            
+
+            <div class="container">
+                
+                <div class="row">
+                    <br /><br /><br />
+                    <br />@RenderBody()<br />
+                    
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+
+                        <div id="body">
+                            @RenderSection("featured", required: false)
+                            <section class="content-wrapper main-content clear-fix">
+                                
+                            </section>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+     <footer>
+        © 2015 SportsClub.com  | <a href="../Home/Index" target="_blank">by Hammad, Shoaib, Tariq</a>
+    </footer>
+    @*<div id="d1"></div>
+    <script>
+
+        $('#profile').change(function () {
+            var value = $('#profile').val();
+
+            $('#profile').load('/home/SavePhoto?cat=' + file);
+        });
+
+    </script>*@
+</body>
+</html>

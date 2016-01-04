@@ -1,0 +1,53 @@
+﻿@model SportsClub.Models.sport
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login</title>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+</head>
+<body>
+
+
+
+    @using (Html.BeginForm("Login", "Account"))
+    {
+        @Html.ValidationSummary(true)
+        <h1>Login</h1>
+
+        <h6>@Html.LabelFor(m => m.Email)</h6>
+        <h6 style="color:black">@Html.EditorFor(m => m.Email)@Html.ValidationMessageFor(m => m.Email)</h6>
+
+        <h6>@Html.LabelFor(m => m.Password)</h6>
+        <h6 style="color:black">@Html.PasswordFor(m => m.Password)@Html.ValidationMessageFor(m => m.Password)</h6>
+        <h6 style="color:black">@Html.CheckBoxFor(m=>m.RememberMe.HasValue)</h6>
+        <h6>@Html.LabelFor(m=>m.RememberMe.HasValue)</h6>
+
+            <br />
+            <div>
+
+                <h4> <input type="submit" value="Login" class="btn btn-blue" style="color:black" /></h4>
+            </div>
+
+    
+    }
+    <p>
+       <h5 style="color:darkgoldenrod">
+           @Html.ActionLink("Register", "Register", "Account") if you don't have an account.
+
+        </h5> </p>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
+</html>

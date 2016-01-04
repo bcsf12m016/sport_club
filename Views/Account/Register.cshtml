@@ -1,0 +1,97 @@
+﻿@model SportsClub.Models.sport
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Register</title>
+    
+    <script>
+        function validatePassword()
+        {
+            
+
+        }
+        
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+</head>
+<body>
+
+
+
+    @using (Html.BeginForm("Edit", "Account", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        <h1>Setting</h1>
+        <br />
+        <h5>Name</h5>
+        <div class="input-group ctrlHolder form-group">
+            <input style="color:black" class="form-control" id="Name" name="Name" value=@Session["Name"] maxlength="25" size="20" type="text" spellcheck="true" required>
+
+        </div>
+            <h5>Old Password</h5>
+            <div class="input-group ctrlHolder form-group">
+                <input style="color:black" class="form-control" id="OPassword" name="OPassword" value="" maxlength="25" size="20" type="password" spellcheck="true"   required>
+                <p id="p1">@ViewBag.ErrorMessage</p>     
+            </div>
+        
+
+        <h5>New Password</h5>
+        <div class="input-group ctrlHolder form-group">
+            <input style="color:black" class="form-control" id="NPassword" name="NPassword" value="" maxlength="25" size="20" type="password" spellcheck="true" required>
+
+        </div>
+
+        <h5>Confirm Password</h5>
+        <div class="input-group ctrlHolder form-group">
+            <input style="color:black" class="form-control" id="CPassword" name="CPassword" value="" maxlength="25" size="20" type="password" spellcheck="true" required>
+
+        </div>
+
+        <h5>Email</h5>
+        <div class="input-group ctrlHolder form-group">
+            <input style="color:black" class="form-control" id="Email" name="Email" value=@Session["Email"] maxlength="30" size="20" type="text" spellcheck="true" required>
+
+        </div>
+
+
+
+        <h5>@Html.LabelFor(m => m.SportsType)</h5>
+
+            <h6 style="color:black">
+                @Html.DropDownListFor(m => m.SportsType,
+                  new List<SelectListItem> {
+                       new SelectListItem { Value = "Football" , Text = "Football" },
+                       new SelectListItem { Value = "Cricket" , Text = "Cricket" },
+                       new SelectListItem { Value = "Hockey" , Text = "Hockey" }
+                    },
+                  new { @class = "myselect" })@Html.ValidationMessageFor(m => m.SportsType)
+            </h6>
+
+                  
+            <div class="input-group ctrlHolder form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+
+            </div>
+
+
+
+    }
+    @{ Html.EndForm();}
+
+
+            @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
+</body>
+
+</html>

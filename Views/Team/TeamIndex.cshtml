@@ -1,0 +1,209 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    
+
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+</head>
+<body>
+
+    
+        
+   
+    <h2 style="float: left">Teams</h2> 
+    <p style="float: right">
+    <a href="#modal-createTeam" data-toggle="modal" class="btn btn-primary">Create New Team</a>
+</p>
+    
+    <br />
+
+    <br />
+
+             @{
+        
+        try
+            {
+        foreach (var i in Model)
+        {
+
+                    Session["TeamName"] = i.TeamName;
+                    Session["TeamPic"] = i.TeamPic;
+                    //window.open('/Team/TeamIndex','mywindow')
+
+
+
+
+                    <div class="text-uppercase close col-lg-3 " style="background-color:black" onclick="location.href='/Team/MyTeam/@i.Id'">
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="/Team/Delete/@i.Id"><i class="fa fa-remove"></i> </a>
+
+                        <div style="color:white">
+                            <div style="display:block">
+                                <a href="/Team/TeamPhotoPage/@i.Id" data-toggle="modal" style="float:left">
+                                    <i class="fa fa-photo" style="color:white"></i>
+
+                                </a>
+
+                            </div>
+
+                            <h3 style="float:left">&emsp;&emsp;&emsp;@Session["TeamName"] </h3>
+
+                        </div>
+
+            <img src=@i.TeamPic width="250" height="250" />
+
+    </div>
+
+
+
+
+
+        
+
+    }
+
+               }
+                        catch(Exception ex)
+                        {
+                            <p>Time Out : Please Login again</p>
+                        }
+
+}
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+
+
+
+    
+    <div class="modal fade tiny" id="modal-createTeam" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog layout-login">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+                    <span class='white bold block text-center margin-bottom-small'></span>
+
+
+
+                    <div class='panel themenav-border boxshadow-darkblue'>
+                        <div class='panel-encase'>
+                            
+                            <h3 class="margin-bottom margin-top text-center uppercase" style="color:black"><i class='fa fa-bars'></i>&nbsp;&nbsp;<b>Create Team</b></h3>
+
+                            @using (Html.BeginForm("CreateTeam", "Team", FormMethod.Post))
+                            {
+                                @Html.ValidationSummary(true)
+
+
+                                <div class="form-group ctrlHolder input-group">
+                                    <span class="input-group-addon"><b><i class="fa fa-smile-o"></i></b></span>
+
+                                    
+                                    <input class="form-control text" id="TeamName" name="TeamName" placeholder="Your Team Name" size="15" type="text" spellcheck="true" required>
+
+                                </div>
+                                <div class="input-group ctrlHolder form-group">
+                                    <span class="input-group-addon">&nbsp;<i class="fa fa-map-marker"></i></span>
+                                    <input class="form-control text" id="address" name="address" placeholder="Address" size="15" type="text" required/>
+                                </div>
+
+                                
+                                
+
+                                <div style="color:black" class="input-group ctrlHolder form-group">
+
+                                    <h6>
+                                        <select id="Gender" name="Gender" required>   
+                                            <option value="Male">-Select- </option>
+                                            <option value="Male"> Male    </option>
+                                            <option value="Female"> Female </option>
+
+                                        </select>
+                                        </h6>        
+                                </div>
+                                            <div class="input-group ctrlHolder form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+
+                                            </div>
+
+                                
+                            }
+                            @{ Html.EndForm();}
+
+                            <hr class='transparent'>
+
+                            <div class="buttonHolder">
+
+
+
+
+
+                                <p>
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+                        <div class='panel-footer'>
+                        </div>
+                    </div>
+
+
+                    <h6>
+                        <a data-dismiss="modal" class='white'>Close &times;</a>
+                    </h6></div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- // modal-login -->
+    <!-- modal-signup -->
+
+
+
+
+
+
+
+    
+    @*Information
+    
+        <div class="input-group ctrlHolder form-group">
+            <h6>
+                @Session["Name"] <br /></h6>
+</div>
+        <div class="input-group ctrlHolder form-group">
+            <h6>
+                @Session["Email"] <br />
+            </h6>
+        </div>
+        <div class="input-group ctrlHolder form-group">
+            <h6> @Session["Sports"] </h6><br />
+        </div>*@
+    
+
+
+    
+
+
+</body>
+</html>
