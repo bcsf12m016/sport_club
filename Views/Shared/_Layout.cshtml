@@ -12,10 +12,7 @@
     @Scripts.Render("~/Content/font-awesome.css")
     @Scripts.Render("~/Content/style.css")
     @Scripts.Render("~/Content/Site.css")
-
-
     @RenderBody()
-
     @Scripts.Render("~/bundles/jquery")
 
     @RenderSection("scripts", required: false)
@@ -104,7 +101,8 @@
     
         <!-- // Login -->
 
-        
+
+        <!-- Modal -->            
         <div class="modal fade tiny" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true" style="display:none">
             <div class="modal-dialog layout-login">
                 <div class="modal-content">
@@ -155,8 +153,7 @@
 
        
                                     </div>
-                                
-
+        
                             </div>
                             <div class='panel-footer'>
                                 
@@ -367,7 +364,7 @@
                 
                 <br />
                 
-                    <form action="/Home/SendEmail" method="post" >
+                    <form action="#" method="post" >
 
                         <div class="input-group ctrlHolder form-group">
                                          <h2>Contact Us</h2> 
@@ -444,8 +441,6 @@
     <script src="~/Scripts/jquery.easing.min.js"></script>
     <!-- CUSTOM SCRIPTS   -->
     <script src="~/Scripts/custom.js"></script>
-
     </body>
-
 </html>
 

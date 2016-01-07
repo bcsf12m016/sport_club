@@ -22,7 +22,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================*/
-
 (function () {
   var $, Morris, minutesSpecHelper, secondsSpecHelper,
     __slice = [].slice,
@@ -30,14 +29,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
   Morris = window.Morris = {};
-
   $ = jQuery;
-
   Morris.EventEmitter = (function() {
     function EventEmitter() {}
-
     EventEmitter.prototype.on = function(name, handler) {
       if (this.handlers == null) {
         this.handlers = {};
@@ -48,7 +43,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       this.handlers[name].push(handler);
       return this;
     };
-
     EventEmitter.prototype.fire = function() {
       var args, handler, name, _i, _len, _ref, _results;
       name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
@@ -62,11 +56,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return _results;
       }
     };
-
     return EventEmitter;
-
   })();
-
   Morris.commas = function(num) {
     var absnum, intnum, ret, strabsnum;
     if (num != null) {
@@ -83,14 +74,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       return '-';
     }
   };
-
   Morris.pad2 = function(number) {
     return (number < 10 ? '0' : '') + number;
   };
-
   Morris.Grid = (function(_super) {
     __extends(Grid, _super);
-
     function Grid(options) {
       this.resizeHandler = __bind(this.resizeHandler, this);
       var _this = this;
@@ -182,7 +170,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         this.postInit();
       }
     }
-
     Grid.prototype.gridDefaults = {
       dateFormat: null,
       axes: true,
@@ -213,7 +200,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       rangeSelectColor: '#eef',
       resize: false
     };
-
     Grid.prototype.setData = function(data, redraw) {
       var e, idx, index, maxGoal, minGoal, ret, row, step, total, y, ykey, ymax, ymin, yval, _ref;
       if (redraw == null) {
@@ -356,7 +342,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.redraw();
       }
     };
-
     Grid.prototype.yboundary = function(boundaryType, currentValue) {
       var boundaryOption, suggestedValue;
       boundaryOption = this.options["y" + boundaryType];
@@ -382,7 +367,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return boundaryOption;
       }
     };
-
     Grid.prototype.autoGridLines = function(ymin, ymax, nlines) {
       var gmax, gmin, grid, smag, span, step, unit, y, ymag;
       span = ymax - ymin;
@@ -421,7 +405,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return grid;
     };
-
     Grid.prototype._calc = function() {
       var bottomOffsets, gridLine, h, i, w, yLabelWidths, _ref, _ref1;
       w = this.el.width();
@@ -467,11 +450,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         }
       }
     };
-
     Grid.prototype.transY = function(y) {
       return this.bottom - (y - this.ymin) * this.dy;
     };
-
     Grid.prototype.transX = function(x) {
       if (this.data.length === 1) {
         return (this.left + this.right) / 2;
@@ -479,7 +460,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.left + (x - this.xmin) * this.dx;
       }
     };
-
     Grid.prototype.redraw = function() {
       this.raphael.clear();
       this._calc();
@@ -490,7 +470,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.draw();
       }
     };
-
     Grid.prototype.measureText = function(text, angle) {
       var ret, tt;
       if (angle == null) {
@@ -501,11 +480,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       tt.remove();
       return ret;
     };
-
     Grid.prototype.yAxisFormat = function(label) {
       return this.yLabelFormat(label);
     };
-
     Grid.prototype.yLabelFormat = function(label) {
       if (typeof this.options.yLabelFormat === 'function') {
         return this.options.yLabelFormat(label);
@@ -513,7 +490,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return "" + this.options.preUnits + (Morris.commas(label)) + this.options.postUnits;
       }
     };
-
     Grid.prototype.drawGrid = function() {
       var lineY, y, _i, _len, _ref, _ref1, _ref2, _results;
       if (this.options.grid === false && ((_ref = this.options.axes) !== true && _ref !== 'both' && _ref !== 'y')) {
@@ -535,7 +511,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Grid.prototype.drawGoals = function() {
       var color, goal, i, _i, _len, _ref, _results;
       _ref = this.options.goals;
@@ -547,7 +522,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Grid.prototype.drawEvents = function() {
       var color, event, i, _i, _len, _ref, _results;
       _ref = this.events;
@@ -559,23 +533,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Grid.prototype.drawGoal = function(goal, color) {
       return this.raphael.path("M" + this.left + "," + (this.transY(goal)) + "H" + this.right).attr('stroke', color).attr('stroke-width', this.options.goalStrokeWidth);
     };
-
     Grid.prototype.drawEvent = function(event, color) {
       return this.raphael.path("M" + (this.transX(event)) + "," + this.bottom + "V" + this.top).attr('stroke', color).attr('stroke-width', this.options.eventStrokeWidth);
     };
-
     Grid.prototype.drawYAxisLabel = function(xPos, yPos, text) {
       return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor).attr('text-anchor', 'end');
     };
-
     Grid.prototype.drawGridLine = function(path) {
       return this.raphael.path(path).attr('stroke', this.options.gridLineColor).attr('stroke-width', this.options.gridStrokeWidth);
     };
-
     Grid.prototype.startRange = function(x) {
       this.hover.hide();
       this.selectFrom = x;
@@ -584,7 +553,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         width: 0
       }).show();
     };
-
     Grid.prototype.endRange = function(x) {
       var end, start;
       if (this.selectFrom) {
@@ -597,17 +565,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.selectFrom = null;
       }
     };
-
     Grid.prototype.resizeHandler = function() {
       this.timeoutId = null;
       this.raphael.setSize(this.el.width(), this.el.height());
       return this.redraw();
     };
-
     return Grid;
-
   })(Morris.EventEmitter);
-
   Morris.parseDate = function(date) {
     var isecs, m, msecs, n, o, offsetmins, p, q, r, ret, secs;
     if (typeof date === 'number') {
@@ -664,12 +628,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       return new Date(parseInt(date, 10), 0, 1).getTime();
     }
   };
-
   Morris.Hover = (function() {
     Hover.defaults = {
       "class": 'morris-hover morris-default-style'
     };
-
     function Hover(options) {
       if (options == null) {
         options = {};
@@ -679,17 +641,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       this.el.hide();
       this.options.parent.append(this.el);
     }
-
     Hover.prototype.update = function(html, x, y) {
       this.html(html);
       this.show();
       return this.moveTo(x, y);
     };
-
     Hover.prototype.html = function(content) {
       return this.el.html(content);
     };
-
     Hover.prototype.moveTo = function(x, y) {
       var hoverHeight, hoverWidth, left, parentHeight, parentWidth, top;
       parentWidth = this.options.parent.innerWidth();
@@ -713,22 +672,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         top: parseInt(top) + "px"
       });
     };
-
     Hover.prototype.show = function() {
       return this.el.show();
     };
-
     Hover.prototype.hide = function() {
       return this.el.hide();
     };
-
     return Hover;
-
   })();
-
   Morris.Line = (function(_super) {
     __extends(Line, _super);
-
     function Line(options) {
       this.hilight = __bind(this.hilight, this);
       this.onHoverOut = __bind(this.onHoverOut, this);
@@ -739,7 +692,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       Line.__super__.constructor.call(this, options);
     }
-
     Line.prototype.init = function() {
       if (this.options.hideHover !== 'always') {
         this.hover = new Morris.Hover({
@@ -750,7 +702,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.on('gridclick', this.onGridClick);
       }
     };
-
     Line.prototype.defaults = {
       lineWidth: 3,
       pointSize: 4,
@@ -765,12 +716,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       continuousLine: true,
       hideHover: false
     };
-
     Line.prototype.calc = function() {
       this.calcPoints();
       return this.generatePaths();
     };
-
     Line.prototype.calcPoints = function() {
       var row, y, _i, _len, _ref, _results;
       _ref = this.data;
@@ -807,7 +756,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Line.prototype.hitTest = function(x) {
       var index, r, _i, _len, _ref;
       if (this.data.length === 0) {
@@ -822,25 +770,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return index;
     };
-
     Line.prototype.onGridClick = function(x, y) {
       var index;
       index = this.hitTest(x);
       return this.fire('click', index, this.data[index].src, x, y);
     };
-
     Line.prototype.onHoverMove = function(x, y) {
       var index;
       index = this.hitTest(x);
       return this.displayHoverForRow(index);
     };
-
     Line.prototype.onHoverOut = function() {
       if (this.options.hideHover !== false) {
         return this.displayHoverForRow(null);
       }
     };
-
     Line.prototype.displayHoverForRow = function(index) {
       var _ref;
       if (index != null) {
@@ -851,7 +795,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.hilight();
       }
     };
-
     Line.prototype.hoverContentForRow = function(index) {
       var content, j, row, y, _i, _len, _ref;
       row = this.data[index];
@@ -866,7 +809,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return [content, row._x, row._ymax];
     };
-
     Line.prototype.generatePaths = function() {
       var c, coords, i, r, smooth;
       return this.paths = (function() {
@@ -911,7 +853,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return _results;
       }).call(this);
     };
-
     Line.prototype.draw = function() {
       var _ref;
       if ((_ref = this.options.axes) === true || _ref === 'both' || _ref === 'x') {
@@ -922,7 +863,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.displayHoverForRow(this.data.length - 1);
       }
     };
-
     Line.prototype.drawXAxis = function() {
       var drawLabel, l, labels, prevAngleMargin, prevLabelMargin, row, ypos, _i, _len, _results,
         _this = this;
@@ -977,7 +917,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Line.prototype.drawSeries = function() {
       var i, _i, _j, _ref, _ref1, _results;
       this.seriesPoints = [];
@@ -990,7 +929,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Line.prototype._drawPointFor = function(index) {
       var circle, row, _i, _len, _ref, _results;
       this.seriesPoints[index] = [];
@@ -1006,7 +944,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Line.prototype._drawLineFor = function(index) {
       var path;
       path = this.paths[index];
@@ -1014,7 +951,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.drawLinePath(path, this.colorFor(null, index, 'line'), index);
       }
     };
-
     Line.createPath = function(coords, smooth, bottom) {
       var coord, g, grads, i, ix, lg, path, prevCoord, x1, x2, y1, y2, _i, _len;
       path = "";
@@ -1050,7 +986,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return path;
     };
-
     Line.gradients = function(coords) {
       var coord, grad, i, nextCoord, prevCoord, _i, _len, _results;
       grad = function(a, b) {
@@ -1081,7 +1016,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Line.prototype.hilight = function(index) {
       var i, _i, _j, _ref, _ref1;
       if (this.prevHilight !== null && this.prevHilight !== index) {
@@ -1100,7 +1034,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return this.prevHilight = index;
     };
-
     Line.prototype.colorFor = function(row, sidx, type) {
       if (typeof this.options.lineColors === 'function') {
         return this.options.lineColors.call(this, row, sidx, type);
@@ -1110,27 +1043,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.options.lineColors[sidx % this.options.lineColors.length];
       }
     };
-
     Line.prototype.drawXAxisLabel = function(xPos, yPos, text) {
       return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
-
     Line.prototype.drawLinePath = function(path, lineColor, lineIndex) {
       return this.raphael.path(path).attr('stroke', lineColor).attr('stroke-width', this.lineWidthForSeries(lineIndex));
     };
-
     Line.prototype.drawLinePoint = function(xPos, yPos, pointColor, lineIndex) {
       return this.raphael.circle(xPos, yPos, this.pointSizeForSeries(lineIndex)).attr('fill', pointColor).attr('stroke-width', this.pointStrokeWidthForSeries(lineIndex)).attr('stroke', this.pointStrokeColorForSeries(lineIndex));
     };
-
     Line.prototype.pointStrokeWidthForSeries = function(index) {
       return this.options.pointStrokeWidths[index % this.options.pointStrokeWidths.length];
     };
-
     Line.prototype.pointStrokeColorForSeries = function(index) {
       return this.options.pointStrokeColors[index % this.options.pointStrokeColors.length];
     };
-
     Line.prototype.lineWidthForSeries = function(index) {
       if (this.options.lineWidth instanceof Array) {
         return this.options.lineWidth[index % this.options.lineWidth.length];
@@ -1138,7 +1065,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.options.lineWidth;
       }
     };
-
     Line.prototype.pointSizeForSeries = function(index) {
       if (this.options.pointSize instanceof Array) {
         return this.options.pointSize[index % this.options.pointSize.length];
@@ -1146,23 +1072,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.options.pointSize;
       }
     };
-
     Line.prototype.pointGrowSeries = function(index) {
       return Raphael.animation({
         r: this.pointSizeForSeries(index) + 3
       }, 25, 'linear');
     };
-
     Line.prototype.pointShrinkSeries = function(index) {
       return Raphael.animation({
         r: this.pointSizeForSeries(index)
       }, 25, 'linear');
     };
-
     return Line;
-
   })(Morris.Grid);
-
   Morris.labelSeries = function(dmin, dmax, pxwidth, specName, xLabelFormat) {
     var d, d0, ddensity, name, ret, s, spec, t, _i, _len, _ref;
     ddensity = 200 * (dmax - dmin) / pxwidth;
@@ -1197,7 +1118,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
     return ret;
   };
-
   minutesSpecHelper = function(interval) {
     return {
       span: interval * 60 * 1000,
@@ -1212,7 +1132,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
     };
   };
-
   secondsSpecHelper = function(interval) {
     return {
       span: interval * 1000,
@@ -1227,7 +1146,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
     };
   };
-
   Morris.LABEL_SPECS = {
     "decade": {
       span: 172800000000,
@@ -1301,19 +1219,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     "5sec": secondsSpecHelper(5),
     "second": secondsSpecHelper(1)
   };
-
   Morris.AUTO_LABEL_ORDER = ["decade", "year", "month", "week", "day", "hour", "30min", "15min", "10min", "5min", "minute", "30sec", "15sec", "10sec", "5sec", "second"];
-
   Morris.Area = (function(_super) {
     var areaDefaults;
-
     __extends(Area, _super);
-
     areaDefaults = {
       fillOpacity: 'auto',
       behaveLikeLine: false
     };
-
     function Area(options) {
       var areaOptions;
       if (!(this instanceof Morris.Area)) {
@@ -1326,7 +1239,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       Area.__super__.constructor.call(this, areaOptions);
     }
-
     Area.prototype.calcPoints = function() {
       var row, total, y, _i, _len, _ref, _results;
       _ref = this.data;
@@ -1354,7 +1266,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Area.prototype.drawSeries = function() {
       var i, range, _i, _j, _k, _len, _ref, _ref1, _results, _results1, _results2;
       this.seriesPoints = [];
@@ -1380,7 +1291,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results2;
     };
-
     Area.prototype._drawFillFor = function(index) {
       var path;
       path = this.paths[index];
@@ -1389,24 +1299,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.drawFilledPath(path, this.fillForSeries(index));
       }
     };
-
     Area.prototype.fillForSeries = function(i) {
       var color;
       color = Raphael.rgb2hsl(this.colorFor(this.data[i], i, 'line'));
       return Raphael.hsl(color.h, this.options.behaveLikeLine ? color.s * 0.9 : color.s * 0.75, Math.min(0.98, this.options.behaveLikeLine ? color.l * 1.2 : color.l * 1.25));
     };
-
     Area.prototype.drawFilledPath = function(path, fill) {
       return this.raphael.path(path).attr('fill', fill).attr('fill-opacity', this.options.fillOpacity).attr('stroke', 'none');
     };
-
     return Area;
-
   })(Morris.Line);
-
   Morris.Bar = (function(_super) {
     __extends(Bar, _super);
-
     function Bar(options) {
       this.onHoverOut = __bind(this.onHoverOut, this);
       this.onHoverMove = __bind(this.onHoverMove, this);
@@ -1418,7 +1322,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         parseTime: false
       }));
     }
-
     Bar.prototype.init = function() {
       this.cumulative = this.options.stacked;
       if (this.options.hideHover !== 'always') {
@@ -1430,7 +1333,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.on('gridclick', this.onGridClick);
       }
     };
-
     Bar.prototype.defaults = {
       barSizeRatio: 0.75,
       barGap: 3,
@@ -1439,7 +1341,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       barRadius: [0, 0, 0, 0],
       xLabelMargin: 50
     };
-
     Bar.prototype.calc = function() {
       var _ref;
       this.calcBars();
@@ -1447,7 +1348,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(this.data.length - 1));
       }
     };
-
     Bar.prototype.calcBars = function() {
       var idx, row, y, _i, _len, _ref, _results;
       _ref = this.data;
@@ -1472,7 +1372,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Bar.prototype.draw = function() {
       var _ref;
       if ((_ref = this.options.axes) === true || _ref === 'both' || _ref === 'x') {
@@ -1480,7 +1379,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return this.drawSeries();
     };
-
     Bar.prototype.drawXAxis = function() {
       var i, label, labelBox, margin, offset, prevAngleMargin, prevLabelMargin, row, textBox, ypos, _i, _ref, _results;
       ypos = this.bottom + (this.options.xAxisLabelTopPadding || this.options.padding / 2);
@@ -1510,7 +1408,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Bar.prototype.drawSeries = function() {
       var barWidth, bottom, groupWidth, idx, lastTop, left, leftPadding, numBars, row, sidx, size, top, ypos, zeroPos;
       groupWidth = this.width / this.options.data.length;
@@ -1559,7 +1456,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return _results;
       }).call(this);
     };
-
     Bar.prototype.colorFor = function(row, sidx, type) {
       var r, s;
       if (typeof this.options.barColors === 'function') {
@@ -1578,7 +1474,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.options.barColors[sidx % this.options.barColors.length];
       }
     };
-
     Bar.prototype.hitTest = function(x) {
       if (this.data.length === 0) {
         return null;
@@ -1586,25 +1481,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       x = Math.max(Math.min(x, this.right), this.left);
       return Math.min(this.data.length - 1, Math.floor((x - this.left) / (this.width / this.data.length)));
     };
-
     Bar.prototype.onGridClick = function(x, y) {
       var index;
       index = this.hitTest(x);
       return this.fire('click', index, this.data[index].src, x, y);
     };
-
     Bar.prototype.onHoverMove = function(x, y) {
       var index, _ref;
       index = this.hitTest(x);
       return (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(index));
     };
-
     Bar.prototype.onHoverOut = function() {
       if (this.options.hideHover !== false) {
         return this.hover.hide();
       }
     };
-
     Bar.prototype.hoverContentForRow = function(index) {
       var content, j, row, x, y, _i, _len, _ref;
       row = this.data[index];
@@ -1620,12 +1511,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       x = this.left + (index + 0.5) * this.width / this.data.length;
       return [content, x];
     };
-
     Bar.prototype.drawXAxisLabel = function(xPos, yPos, text) {
       var label;
       return label = this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
-
     Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor, opacity, radiusArray) {
       var maxRadius, path;
       maxRadius = Math.max.apply(Math, radiusArray);
@@ -1636,21 +1525,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return path.attr('fill', barColor).attr('fill-opacity', opacity).attr('stroke', 'none');
     };
-
     Bar.prototype.roundedRect = function(x, y, w, h, r) {
       if (r == null) {
         r = [0, 0, 0, 0];
       }
       return ["M", x, r[0] + y, "Q", x, y, x + r[0], y, "L", x + w - r[1], y, "Q", x + w, y, x + w, y + r[1], "L", x + w, y + h - r[2], "Q", x + w, y + h, x + w - r[2], y + h, "L", x + r[3], y + h, "Q", x, y + h, x, y + h - r[3], "Z"];
     };
-
     return Bar;
-
   })(Morris.Grid);
-
   Morris.Donut = (function(_super) {
     __extends(Donut, _super);
-
     Donut.prototype.defaults = {
       colors: ['#0B62A4', '#3980B5', '#679DC6', '#95BBD7', '#B0CCE1', '#095791', '#095085', '#083E67', '#052C48', '#042135'],
       backgroundColor: '#FFFFFF',
@@ -1658,7 +1542,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       formatter: Morris.commas,
       resize: false
     };
-
     function Donut(options) {
       this.resizeHandler = __bind(this.resizeHandler, this);
       this.select = __bind(this.select, this);
@@ -1690,7 +1573,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       this.setData(options.data);
     }
-
     Donut.prototype.redraw = function() {
       var C, cx, cy, i, idx, last, max_value, min, next, seg, total, value, w, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
       this.raphael.clear();
@@ -1736,7 +1618,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return _results;
     };
-
     Donut.prototype.setData = function(data) {
       var row;
       this.data = data;
@@ -1752,11 +1633,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }).call(this);
       return this.redraw();
     };
-
     Donut.prototype.click = function(idx) {
       return this.fire('click', idx, this.data[idx]);
     };
-
     Donut.prototype.select = function(idx) {
       var row, s, segment, _i, _len, _ref;
       _ref = this.segments;
@@ -1769,7 +1648,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       row = this.data[idx];
       return this.setLabels(row.label, this.options.formatter(row.value, row));
     };
-
     Donut.prototype.setLabels = function(label1, label2) {
       var inner, maxHeightBottom, maxHeightTop, maxWidth, text1bbox, text1scale, text2bbox, text2scale;
       inner = (Math.min(this.el.width() / 2, this.el.height() / 2) - 10) * 2 / 3;
@@ -1795,7 +1673,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         transform: "S" + text2scale + "," + text2scale + "," + (text2bbox.x + text2bbox.width / 2) + "," + text2bbox.y
       });
     };
-
     Donut.prototype.drawEmptyDonutLabel = function(xPos, yPos, color, fontSize, fontWeight) {
       var text;
       text = this.raphael.text(xPos, yPos, '').attr('font-size', fontSize).attr('fill', color);
@@ -1804,20 +1681,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       }
       return text;
     };
-
     Donut.prototype.resizeHandler = function() {
       this.timeoutId = null;
       this.raphael.setSize(this.el.width(), this.el.height());
       return this.redraw();
     };
-
     return Donut;
-
   })(Morris.EventEmitter);
-
   Morris.DonutSegment = (function(_super) {
     __extends(DonutSegment, _super);
-
     function DonutSegment(cx, cy, inner, outer, p0, p1, color, backgroundColor, index, raphael) {
       this.cx = cx;
       this.cy = cy;
@@ -1838,24 +1710,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       this.selectedPath = this.calcSegment(this.inner + 3, this.inner + this.outer);
       this.hilight = this.calcArc(this.inner);
     }
-
     DonutSegment.prototype.calcArcPoints = function(r) {
       return [this.cx + r * this.sin_p0, this.cy + r * this.cos_p0, this.cx + r * this.sin_p1, this.cy + r * this.cos_p1];
     };
-
     DonutSegment.prototype.calcSegment = function(r1, r2) {
       var ix0, ix1, iy0, iy1, ox0, ox1, oy0, oy1, _ref, _ref1;
       _ref = this.calcArcPoints(r1), ix0 = _ref[0], iy0 = _ref[1], ix1 = _ref[2], iy1 = _ref[3];
       _ref1 = this.calcArcPoints(r2), ox0 = _ref1[0], oy0 = _ref1[1], ox1 = _ref1[2], oy1 = _ref1[3];
       return ("M" + ix0 + "," + iy0) + ("A" + r1 + "," + r1 + ",0," + this.is_long + ",0," + ix1 + "," + iy1) + ("L" + ox1 + "," + oy1) + ("A" + r2 + "," + r2 + ",0," + this.is_long + ",1," + ox0 + "," + oy0) + "Z";
     };
-
     DonutSegment.prototype.calcArc = function(r) {
       var ix0, ix1, iy0, iy1, _ref;
       _ref = this.calcArcPoints(r), ix0 = _ref[0], iy0 = _ref[1], ix1 = _ref[2], iy1 = _ref[3];
       return ("M" + ix0 + "," + iy0) + ("A" + r + "," + r + ",0," + this.is_long + ",0," + ix1 + "," + iy1);
     };
-
     DonutSegment.prototype.render = function() {
       var _this = this;
       this.arc = this.drawDonutArc(this.hilight, this.color);
@@ -1865,7 +1733,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return _this.fire('click', _this.index);
       });
     };
-
     DonutSegment.prototype.drawDonutArc = function(path, color) {
       return this.raphael.path(path).attr({
         stroke: color,
@@ -1873,7 +1740,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         opacity: 0
       });
     };
-
     DonutSegment.prototype.drawDonutSegment = function(path, fillColor, strokeColor, hoverFunction, clickFunction) {
       return this.raphael.path(path).attr({
         fill: fillColor,
@@ -1881,7 +1747,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         'stroke-width': 3
       }).hover(hoverFunction).click(clickFunction);
     };
-
     DonutSegment.prototype.select = function() {
       if (!this.selected) {
         this.seg.animate({
@@ -1893,7 +1758,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.selected = true;
       }
     };
-
     DonutSegment.prototype.deselect = function() {
       if (this.selected) {
         this.seg.animate({
@@ -1905,9 +1769,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return this.selected = false;
       }
     };
-
     return DonutSegment;
-
   })(Morris.EventEmitter);
-
 }).call(this);

@@ -19,7 +19,8 @@
 </head>
 <body>
 
-    
+    <a href="#modal-createTeam" data-toggle="modal" class="btn btn-primary">Create New Team</a>
+   
         
    
     <h2 style="float: left">Teams</h2> 
@@ -27,70 +28,11 @@
     <a href="#modal-createTeam" data-toggle="modal" class="btn btn-primary">Create New Team</a>
 </p>
     
-    <br />
-
-    <br />
-
-             @{
-        
-        try
-            {
-        foreach (var i in Model)
-        {
-
-                    Session["TeamName"] = i.TeamName;
-                    Session["TeamPic"] = i.TeamPic;
-                    //window.open('/Team/TeamIndex','mywindow')
-
-
-
-
-                    <div class="text-uppercase close col-lg-3 " style="background-color:black" onclick="location.href='/Team/MyTeam/@i.Id'">
-                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="/Team/Delete/@i.Id"><i class="fa fa-remove"></i> </a>
-
-                        <div style="color:white">
-                            <div style="display:block">
-                                <a href="/Team/TeamPhotoPage/@i.Id" data-toggle="modal" style="float:left">
-                                    <i class="fa fa-photo" style="color:white"></i>
-
-                                </a>
-
-                            </div>
-
-                            <h3 style="float:left">&emsp;&emsp;&emsp;@Session["TeamName"] </h3>
-
-                        </div>
-
-            <img src=@i.TeamPic width="250" height="250" />
-
-    </div>
-
-
-
-
-
-        
-
-    }
-
-               }
-                        catch(Exception ex)
-                        {
-                            <p>Time Out : Please Login again</p>
-                        }
 
 }
     <br />
     <br />
     <br />
-
-
-
-
-
-
-
-
 
     
     <div class="modal fade tiny" id="modal-createTeam" tabindex="-1" role="dialog" aria-hidden="true">
